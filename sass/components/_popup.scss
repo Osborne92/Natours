@@ -6,6 +6,9 @@
     left: 0;
     background-color: rgba($color-black, .8);
     z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
 
      &__content {
         @include absCenter;
@@ -16,6 +19,9 @@
         display: table;
         // prevents the image from covering the border
         overflow: hidden;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+        transition: all .5s .2s;
     }
 
     &__left {
@@ -42,5 +48,46 @@
         column-count: 2;
         column-gap: 5rem;
         column-rule: 1px solid $color-grey-light-2;
+
+        -moz-column-count: 2;
+        -moz-column-gap: 5rem;
+        -moz-column-rule: 1px solid $color-grey-light-2;
+
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    // on popup target, style content. When book button is clicked, popup emerges
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    // close button
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-grey-dark;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            // look at this
+            display: inline-block;
+            transition: all .2s;
+            line-height: 1;
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
     }
 }
